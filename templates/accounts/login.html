@@ -1,0 +1,15 @@
+{% extends 'base_top.html' %}
+{% load static %}
+
+{% block 'title' %}{{ title }}{% endblock 'title' %}
+
+{% block 'content' %}
+<div class="container application-body">
+<h2 class="offset-5">LOGIN</h2>
+<form action="{% url 'login' %}" method="post">{% csrf_token %}
+    {{ form }}
+    <p>{{ message }}</p>
+    <input class="btn btn-primary mt-3" type="submit" value="LOGIN">
+</form>
+</div>
+{% endblock 'content' %}
