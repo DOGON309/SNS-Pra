@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block 'title' %}{{ title }}{% endblock 'title' %}
+
+{% block 'content' %}
+<div class="container mt-3">
+    <div class="card text-center">
+        <div class="card-header">
+          {{ post.owner }}
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ post.content | twitter_urlize }}</p>
+        </div>
+        <div class="card-footer text-muted">
+          {{ post.up_date }}
+        </div>
+      </div>
+    <p class="btn btn-primary mt-3" id="comment">コメント書く</p>
+    <div id="comment-content" style="display: none">
+      <form action="/post/comment/{{ post.id }}" method="post">{% csrf_token %}
+        {{ form }}
+        <input class="btn btn-primary mt-3" type="submit" value="送信">
+      </form>
+    </div>
+    {% for item in items %}
+    <div class="card mt-5">
+        <h5 class="card-header">{{ item.owner }}</h5>
+        <div class="card-body">
+          <p class="card-text">{{ item.content }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            {{ item.up_date }}
+          </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock 'content' %}

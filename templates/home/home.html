@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load extra_tags %}
 
 {% block 'title' %}{{ title }}{% endblock 'title' %}
 
@@ -8,8 +9,9 @@
 <div class="card mt-3">
 <div class="card-body">
 <h5 class="card-title">{{ item.owner }}</h5>
-<p class="card-text">{{ item.content }}</p>
-<p class="card-link">GOOD: <span><a class="btn btn-primary" href="/good/{{ item.pk }}">{{ item.good_count }}</a></span></p>
+<p class="card-text">{{ item.content | twitter_urlize }}</p>
+<p class="card-link">GOOD: <span><a class="btn btn-primary" href="/good/{{ item.pk }}">{{ item.good_count }}</a></span><span><a href="/good/view/{{ item.pk }}">グッドした人</a></span></p>
+<p class="card-text">コメント: <span><a href="/home/comment/{{ item.pk }}">見る</a></span></p>
 </div>
 </div>
 {% endfor %}

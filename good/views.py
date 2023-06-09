@@ -15,3 +15,12 @@ def GoodView(request, id):
     cnt.good_count += 1
     cnt.save()
     return redirect('/home')
+
+def BadView(request, id):
+    params = {
+        'title': 'グッドした人',
+        'items': '',
+    }
+    model = PostModel.objects.get(pk = id)
+    params['items'] = GoodModel.objects.filter(message_id = model)
+    return render(request, 'good/bad.html', params)

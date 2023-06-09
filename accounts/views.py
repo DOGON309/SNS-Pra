@@ -28,12 +28,13 @@ def SignupView(request):
         'form': SignupForm,
         'message': '',
     }
+    print(request.method)
     if request.method == 'POST':
         email = request.POST['email']
         username = request.POST['username']
         password = request.POST['password']
         try:
-            user = User.objects.create_user(username, email, password)
+            User.objects.create_user(username, email, password)
         except IntegrityError:
             params['message'] = 'すでに登録されています'
             return render(request, 'accounts/signup.html', params)
